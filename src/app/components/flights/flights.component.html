@@ -1,0 +1,30 @@
+<form [formGroup]="flightForm">
+    <div class="mb-3">
+      <label class="form-label">Origin</label>
+      <input type="text"
+             class="form-control"
+             formControlName="origin"
+             maxlength="3">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Destination</label>
+      <input type="text"
+             class="form-control"
+             formControlName="destination"
+             maxlength="3">
+    </div>
+    <div class="col">
+        <span class="form-text text-danger"
+        *ngIf="invalidField('destination')">
+              Los campos son iguales
+        </span>
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary"
+            [disabled]="flightForm.invalid">
+            Calcular ruta
+    </button>
+</form>
+
+<pre> {{ flightForm.valid }} </pre>
