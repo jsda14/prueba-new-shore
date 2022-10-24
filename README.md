@@ -12,12 +12,12 @@ Se implementó solución a los 4 problemas planteados.
 1 - Se hace el modelado de clases solicitado. 
 2 - Se realiza el consumo de API con método de NGRX (manager state) tomando como API principal "Rutas multiples y de retorno".
 3 - Se realizan validaciones en los campos de Origin y Destination y se hace visualización de las rutas posibles para el usuario.
-4 - Se implementa por medio de un select la opción de escoger el tipo de moneda. Para este caso se trabajo con dolar, euro y peso colombiano.
+4 - Se implementa por medio de un select la opción de escoger el tipo de moneda. Para este caso se trabajó con dólar, euro y peso colombiano.
 
 ## Dificultades
 
 - No se logró implementar test de pruebas unitarias
-- Se identificó un error al momento de realizar ciertas combinaciones de rutas. Debido a que no se logró hayar una validación adecuada, por lo que en su totalidad no está funcional.
+- Se identificó un error al momento de realizar ciertas combinaciones de rutas. Debido a que no se logró hallar una validación adecuada, en su totalidad no está funcional.
 
 ## Herramientas sin utilizar
 
