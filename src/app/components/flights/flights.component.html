@@ -1,30 +1,114 @@
 <form [formGroup]="flightForm">
     <div class="mb-3">
-      <label class="form-label">Origin</label>
-      <input type="text"
-             class="form-control"
-             formControlName="origin"
-             maxlength="3">
+        <label class="form-label">Origin</label>
+        <input type="text" class="form-control" formControlName="origin" maxlength="3">
     </div>
     <div class="mb-3">
-      <label class="form-label">Destination</label>
-      <input type="text"
-             class="form-control"
-             formControlName="destination"
-             maxlength="3">
+        <label class="form-label">Destination</label>
+        <input type="text" class="form-control" formControlName="destination" maxlength="3">
+    </div>
+    <div class="mb-3" *ngIf="journey">
+        <label class="form-label">Tipo de moneda</label>
+        <select class="form-control" name="" id="" (change)="currencyType($event)">
+            <option value="1">USD</option>
+            <option value="2">COP</option>
+            <option value="3">EUR</option>
+        </select>
     </div>
     <div class="col">
-        <span class="form-text text-danger"
-        *ngIf="invalidField('destination')">
-              Los campos son iguales
+        <span class="form-text text-danger" *ngIf="invalidField('destination')">
+            Los campos son iguales
         </span>
     </div>
 
-    <button type="submit"
-            class="btn btn-primary"
-            [disabled]="flightForm.invalid">
-            Calcular ruta
+    <button type="submit" class="btn btn-primary" [disabled]="flightForm.invalid" (click)="calculateRoute()">
+        Calcular ruta
     </button>
 </form>
+<div *ngIf="journey">
+    <div class="card">
+        <div class="row">
+            <div class="col-6">
+                <img src="https://images.emojiterra.com/google/noto-emoji/v2.034/512px/2708.png" class="card-img-top"
+                    alt="...">
+            </div>
+            <div class="card-body col-6">
+                <span class="card-text"><b>Orígen:</b></span>
+                <pre>{{journey.origin}}</pre>
+                <span class="card-text"><b>Destino:</b></span>
+                <pre>{{journey.destination}}</pre>
+                <span class="card-text"><b>Precio:</b></span>
+                <pre>{{totalPrice}}</pre>
+                <div *ngIf="journey.flight[1]" class="row">
+                    <div class="col-6">
+                        <h5 class="card-title">Primer vuelo:</h5>
+                        <p class="card-text"><b>Punto de partida:</b> {{journey.flight[0].origin}}</p>
+                        <p class="card-text"><b> Punto de llegada:</b> {{journey.flight[0].destination}}</p>
+                        <span class="card-text"><b>Precio:</b></span>
+                        <pre>{{firstPrice}}</pre>
+                        <span class="card-text"><b>Compañía aérea:</b></span>
+                        <pre>{{journey.flight[0].transport.flightCarrier}}</pre>
+                        <span class="card-text"><b>Número del vuelo:</b></span>
+                        <pre>{{journey.flight[0].transport.flightNumber}}</pre>
+                    </div>
+                    <div class="col-6">
+                        <h5 class="card-title">Segundo vuelo:</h5>
+                        <p class="card-text"><b>Punto de partida:</b> {{journey.flight[1].origin}}</p>
+                        <p class="card-text"><b> Punto de llegada:</b> {{journey.flight[1].destination}}</p>
+                        <span class="card-text"><b>Precio:</b></span>
+                        <pre>{{secondPrice}}</pre>
+                        <span class="card-text"><b>Compañía aérea:</b></span>
+                        <pre>{{journey.flight[0].transport.flightCarrier}}</pre>
+                        <span class="card-text"><b>Número del vuelo:</b></span>
+                        <pre>{{journey.flight[0].transport.flightNumber}}</pre>
+                    </div>
+                </div>
+                <div *ngIf="!journey.flight[1]">
+                    <span class="card-text"><b>Compañía aérea:</b></span>
+                    <pre>{{journey.flight[0].transport.flightCarrier}}</pre>
+                    <span class="card-text"><b>Número del vuelo:</b></span>
+                    <pre>{{journey.flight[0].transport.flightNumber}}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div *ngIf="journey">
+    <span>Orígen:</span>
+    <pre>{{journey.origin}}</pre>
+    <span>Destino:</span>
+    <pre>{{journey.destination}}</pre>
+    <span>Precio:</span>
+    <pre>{{journey.price}}</pre>
+    <div *ngIf="journey.flight[1]">
+        <span>Primer vuelo:</span>
+        <br>
+        <span><b>Punto de partida:</b> {{journey.flight[0].origin}}, <b>Punto de llegada:</b>
+            {{journey.flight[0].destination}} </span>
+        <br>
+        <span>Precio:</span>
+        <pre>{{journey.flight[0].prices}}</pre>
+        <span>Compañía aérea:</span>
+        <pre>{{journey.flight[0].transport.flightCarrier}}</pre>
+        <span>Número del vuelo:</span>
+        <pre>{{journey.flight[0].transport.flightNumber}}</pre>
+        <span>Segundo vuelo:</span>
+        <br>
+        <span> <b>Punto de partida:</b> {{journey.flight[1].origin}}, <b>Punto de llegada:</b>
+            {{journey.flight[1].destination}} </span>
+        <br>
+        <span>Precio:</span>
+        <pre>{{journey.flight[1].prices}}</pre>
+        <span>Compañía aérea:</span>
+        <pre>{{journey.flight[1].transport.flightCarrier}}</pre>
+        <span>Número del vuelo:</span>
+        <pre>{{journey.flight[1].transport.flightNumber}}</pre>
+    </div>
+    <div *ngIf="!journey.flight[1]">
+        <span>Compañía aérea:</span>
+        <pre>{{journey.flight[0].transport.flightCarrier}}</pre>
+        <span>Número del vuelo:</span>
+        <pre>{{journey.flight[0].transport.flightNumber}}</pre>
+    </div>
 
-<pre> {{ flightForm.valid }} </pre>
+</div> -->

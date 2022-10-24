@@ -1,7 +1,7 @@
 export class Transport {
 
     constructor(
-        public flightCarriet: string,
+        public flightCarrier: string,
         public flightNumber: string
     ){}
 }
